@@ -12,6 +12,6 @@
       "RUN apk del .build-deps",
       "COPY docker/vue-storefront-api/vue-storefront-api.sh /usr/src/app",
       "ENV VS_ENV production",
-      "CMD [ \"vue-storefront-api.sh\" ]"
+      "CMD [ \"yarn\", \"start\" ]"
   ]
 }
