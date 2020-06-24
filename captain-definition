@@ -8,10 +8,7 @@
       "COPY ./yarn.lock /usr/src/app/",
       "RUN apk add --no-cache curl git",
       "RUN yarn install --no-cache",
-      "COPY ./ /usr/src/app",
-      "ENV VS_ENV production",
-      "ENV PORT 80",
-      "EXPOSE 80",
-      "CMD [ \"yarn\", \"dev\" ]"
+      "COPY docker/vue-storefront-api/vue-storefront-api.sh /usr/local/bin/ /usr/src/app",
+      "CMD [ \"vue-storefront-api.sh\" ]"
   ]
 }
