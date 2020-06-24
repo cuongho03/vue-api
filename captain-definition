@@ -1,13 +1,17 @@
 {
   "schemaVersion": 2,
   "dockerfileLines": [
-      "FROM node:12.13.0-alpine",
+      "FROM node:10-alpine",
       "RUN mkdir -p /usr/src/app",
       "WORKDIR /usr/src/app",
       "COPY ./package.json /usr/src/app/",
-      "RUN yarn install",
+      "COPY ./yarn.lock /usr/src/app/",
+      "RUN apk add --no-cache curl git,
+      "RUN apk add --no-cache --virtual .build-deps ca-certificates wget python make g++ && \
+    yarn install --no-cache && \
+    apk del .build-deps",
       "COPY ./ /usr/src/app",
-      "ENV NODE_ENV production",
+      "ENV VS_ENV production",
       "ENV PORT 80",
       "EXPOSE 80",
       "CMD [ \"yarn\", \"start\" ]"
